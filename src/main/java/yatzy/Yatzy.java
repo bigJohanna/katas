@@ -61,7 +61,7 @@ public class Yatzy {
     }
 
     public static int onePair(DiceHand diceHand) {
-        return findMaxSumByFrequency(diceHand, 2);
+        return findMaxSumByLargerThanEqualsFrequency(diceHand, 2);
 
     }
 
@@ -72,7 +72,7 @@ public class Yatzy {
             return fourOfAKindAsTwoPairs;
 
         else {
-            int pair1 = findMaxSumByFrequency(diceHand, 2);
+            int pair1 = findMaxSumByLargerThanEqualsFrequency(diceHand, 2);
 
             int pair2 = 2 * diceHand.intStream()
                     .filter(i -> i != pair1/2 && //get any that is not equal to value of pair1
@@ -85,22 +85,29 @@ public class Yatzy {
     }
 
     public static int fourOfAKind(DiceHand diceHand) {
-        return findMaxSumByFrequency(diceHand, 4);
+        return findMaxSumByLargerThanEqualsFrequency(diceHand, 4);
     }
 
     private static int sumByValue(DiceHand diceHand, int value) {
         return diceHand.intStream().filter(d -> d == value).sum();
     }
 
-    private static int findMaxSumByFrequency(DiceHand diceHand, int freq) {
+    private static int findMaxSumByLargerThanEqualsFrequency(DiceHand diceHand, int freq) {
         return freq * diceHand.intStream()
                 .filter(i -> Collections.frequency(diceHand.listOfInteger(), i) >= freq)
                 .max()
                 .orElse(0);
     }
 
+    private static int findMaxSumByFrequency(DiceHand diceHand, int freq){
+        return diceHand.intStream()
+                .filter(i -> Collections.frequency(diceHand.listOfInteger(), i) == freq)
+                .findFirst()
+                .orElse(0);
+    }
+
     public static int threeOfAKind(DiceHand diceHand) {
-        return findMaxSumByFrequency(diceHand, 3);
+        return findMaxSumByLargerThanEqualsFrequency(diceHand, 3);
     }
 
     public static int smallStraight(DiceHand diceHand) {
@@ -115,15 +122,9 @@ public class Yatzy {
 
     public static int fullHouse(DiceHand diceHand) {
 
-        int threeOfAKind = 3 * diceHand.intStream()
-                .filter(i -> Collections.frequency(diceHand.listOfInteger(), i) == 3)
-                .findFirst()
-                .orElse(0);
+        int threeOfAKind = 3 * findMaxSumByFrequency(diceHand,3);
 
-        int pair = 2 * diceHand.intStream()
-                .filter(i -> Collections.frequency(diceHand.listOfInteger(), i) == 2)
-                .findFirst()
-                .orElse(0);
+        int pair = 2 * findMaxSumByFrequency(diceHand,2);
 
         return threeOfAKind != 0 && pair != 0 ? threeOfAKind + pair : 0;
     }
