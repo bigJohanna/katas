@@ -3,6 +3,8 @@ package yatzy;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 
 public class YatzyTest {
@@ -26,7 +28,7 @@ public class YatzyTest {
 
     @Test
     public void test_1s() {
-        assertTrue(Yatzy.ones(new Yatzy.DiceHand(1, 2, 3, 4, 5)) == 1);
+        assertEquals(1, Yatzy.ones(new Yatzy.DiceHand(1, 2, 3, 4, 5)));
         assertEquals(2, Yatzy.ones(new Yatzy.DiceHand(1, 2, 1, 4, 5)));
         assertEquals(0, Yatzy.ones(new Yatzy.DiceHand(6, 2, 2, 4, 5)));
         assertEquals(4, Yatzy.ones(new Yatzy.DiceHand(1, 2, 1, 1, 1)));
@@ -107,12 +109,14 @@ public class YatzyTest {
         assertEquals(0, Yatzy.largeStraight(new Yatzy.DiceHand(1, 2, 2, 4, 5)));
     }
 
-    @Test
-    public void fullHouse() {
-        assertEquals(0, Yatzy.fullHouse(new Yatzy.DiceHand(2, 3, 4, 5, 6)));
-        assertEquals(18, Yatzy.fullHouse(new Yatzy.DiceHand(6, 2, 2, 2, 6)));
-        assertEquals(0, Yatzy.fullHouse(new Yatzy.DiceHand(2, 2, 3, 3, 4)));
-        assertEquals(0, Yatzy.fullHouse(new Yatzy.DiceHand(2, 2, 2, 2, 2))); //What are the rules?
+    @ParameterizedTest
+    @CsvSource({
+            "0,2, 3, 4, 5, 6",
+            "18,6, 2, 2, 2, 6",
+            "0, 2,2,3,3,4",
+            "0,2,2,2,2,2"}) //Assuming 5 of a kind cannot count as full house
+    public void fullHouse(int expected, int input1, int input2, int input3, int input4, int input5) {
+        assertEquals(expected, Yatzy.fullHouse(new Yatzy.DiceHand(input1, input2, input3, input4, input5)));
 
     }
 }
