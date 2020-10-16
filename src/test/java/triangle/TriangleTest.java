@@ -13,10 +13,10 @@ class TriangleTest {
     Point[] pointArray = {a,b,c};
     Triangle isoTriangle = new Triangle(a, b, c);
 
-    Point a2 = new Point(1,2);
-    Point b2 = new Point(2,3);
-    Point c2 = new Point(4,4);
-    Triangle scaTriangle = new Triangle(a2,b2,c2);
+    Point x = new Point(1,2);
+    Point y = new Point(2,3);
+    Point z = new Point(4,4);
+    Triangle scaTriangle = new Triangle(x, y, z);
 
     Triangle eqiTriangle = new Triangle(2,2,2);
     @DisplayName("Given an isosicles triangle, isIsosicles should return true.")
