@@ -113,10 +113,9 @@ public class YatzyTest {
     @CsvSource({
             "0,2, 3, 4, 5, 6",
             "18,6, 2, 2, 2, 6",
-            "0, 2,2,3,3,4",
-            "0,2,2,2,2,2"}) //Assuming 5 of a kind cannot count as full house
+            "0, 2,2,3,3,4"})
     public void sumOfPairAndThreeOfAKind(int expected, int input1, int input2, int input3, int input4, int input5) {
         assertEquals(expected, Yatzy.fullHouse(new Yatzy.DiceHand(input1, input2, input3, input4, input5)));
-
+        assertEquals(0, Yatzy.fullHouse(new Yatzy.DiceHand(2, 2, 2, 2, 2)), "Assuming 5 of a kind cannot count as full house");
     }
 }
