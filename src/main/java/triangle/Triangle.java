@@ -12,42 +12,38 @@ public class Triangle {
     }
 
     public Triangle(double[] s) {
-        this(s[0],s[1],s[2]);
+        this(s[0], s[1], s[2]);
     }
 
     public Triangle(Point a, Point b, Point c) {
         sides = new double[3];
-        sides[0] = Math.sqrt(Math.pow((double) (b.x - a.x), 2.0) + Math.pow((double) (b.y - a.y), 2.0));
-        sides[1] = Math.sqrt(Math.pow((double) (b.x - c.x), 2.0) + Math.pow((double) (b.y - a.y), 2.0));
-        sides[2] = Math.sqrt(Math.pow((double) (c.x - a.x), 2.0) + Math.pow((double) (c.y - a.y), 2.0));
+
+        sides[0] = sqrtPow2((b.x - a.x), (b.y - a.y));
+        sides[1] = sqrtPow2((b.x - c.x), (b.y - a.y));
+        sides[2] = sqrtPow2((c.x - a.x), (c.y - a.y));
+    }
+
+    private double sqrtPow2(int i, int j) {
+        return Math.sqrt(Math.pow((double) (i), 2.0) + Math.pow((double) (j), 2.0));
     }
 
     public Triangle(Point[] s) {
-        this(s[0],s[1],s[2]);
+        this(s[0], s[1], s[2]);
     }
 
     private int uniqueSides() {
-        return (int)DoubleStream.of(sides).distinct().count();
+        return (int) DoubleStream.of(sides).distinct().count();
     }
 
     public boolean isScalene() {
-        if (uniqueSides() == 3) {
-            return true;
-        }
-        return false;
+        return uniqueSides() == 3;
     }
 
     public boolean isEquilateral() {
-        if (uniqueSides() == 1) {
-            return true;
-        }
-        return false;
+        return uniqueSides() == 1;
     }
 
     public boolean isIsosceles() {
-        if (uniqueSides() == 2) {
-            return true;
-        }
-        return false;
+        return uniqueSides() == 2;
     }
 }
