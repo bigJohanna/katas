@@ -23,4 +23,6 @@ public class ClientTest {
 
         assertThat(client.place("GOOG 300 829.08 B")).isEqualTo("Buy: USD 248724.00, Sell: USD 0.00");
     }
+
+
 }
