@@ -36,4 +36,21 @@ class StringCalculatorTest {
     void givenTwoBackslashFirstInInputSetCustomDelimeter() {
         assertThat(cal.add("//;\n1;2")).isEqualTo(3);
     }
+
+    @Test
+    void givenNegativeNumbersThrowException() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(()->cal.add("-1,-2,4"))
+                .withMessage("negatives not allowed,-1,-2");
+    }
+
+    @Test
+    void numbersGt1000IsIgnored() {
+        assertThat(cal.add("2,1001")).isEqualTo(2);
+    }
+
+    @Test
+    void delimetersCanBeOfAnyLength() {
+        assertThat(cal.add("//[***]\n1***2***3")).isEqualTo(6);
+    }
 }
