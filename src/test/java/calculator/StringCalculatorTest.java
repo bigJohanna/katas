@@ -21,10 +21,10 @@ class StringCalculatorTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", " ", "r", "one", "2,y3", "@", "1,\\n"})
+    @ValueSource(strings = {"", " ", "r", "one", "2,y3", "@", "1,\n"})
     void givenInvaldInputShouldReturn0(String param) {
-        int actual = cal.add(param);
-        assertThat(actual).isEqualTo(0);
+        assertThatExceptionOfType(NumberFormatException.class)
+                .isThrownBy(()-> cal.add(param));
     }
 
     @Test
@@ -33,6 +33,7 @@ class StringCalculatorTest {
     }
 
     @Test
-    void name() {
+    void givenTwoBackslashFirstInInputSetCustomDelimeter() {
+        assertThat(cal.add("//;\n1;2")).isEqualTo(3);
     }
 }
