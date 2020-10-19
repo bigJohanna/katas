@@ -16,7 +16,6 @@ public class TicTacToeChecker {
     private int winner(int[][] game) {
         int[][] combinations = getAllLines(game);
 
-
         return Arrays.stream(combinations)
                 .filter(this::threeIsSame)
                 .findFirst()

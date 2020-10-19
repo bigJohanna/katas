@@ -10,7 +10,7 @@ class TicTacToeCheckerTest {
     TicTacToeChecker board = new TicTacToeChecker();
 
     @Test
-    void givenBoardOfCatsGameReturn0() {
+    void givenTieGameReturns0() {
         int[][] game = {{1,2,1},
                         {2,1,2},
                         {2,1,2}};
@@ -55,6 +55,7 @@ class TicTacToeCheckerTest {
         assertThat(board.checkGame(test1)).isEqualTo(1);
         assertThat(board.checkGame(test2)).isEqualTo(2);
     }
+
 
     @Test
     void diagonalIsThreeEqual() {
