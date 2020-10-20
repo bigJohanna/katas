@@ -14,7 +14,7 @@ public class TicTacToeChecker {
     }
 
     private int winner(int[][] game) {
-        int[][] combinations = getAllLines(game);
+        int[][] combinations = getAllCombinations(game);
 
         return Arrays.stream(combinations)
                 .filter(this::threeIsSame)
@@ -27,7 +27,7 @@ public class TicTacToeChecker {
         return IntStream.of(combination).sum() / 3;
     }
 
-    private int[][] getAllLines(int[][] game) {
+    private int[][] getAllCombinations(int[][] game) {
         int[][] columns = separateColumnValuesFromGame(game);
         int[][] diagonals = separateDiagonalValuesFromGame(game);
         int[][] combinations = append(game, columns);
