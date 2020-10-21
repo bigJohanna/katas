@@ -49,4 +49,15 @@ public class Stepdefs {
     public void todayIs(String today) {
         this.today = today;
     }
+
+    @Given("today is Monday")
+    public void todayIsMonday() {
+        this.today = "Monday";
+    }
+
+    @When("I ask whether it's Monday")
+    public void iAskWhetherItSMonday() {
+        this.actualAnswer = IsItMonday.isItMonday(today);
+    }
+
 }

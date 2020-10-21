@@ -1,8 +1,13 @@
-# language:en
-
+#language:en
 Feature: Is it Friday yet?
   Everybody wants to know when it's Friday
 #https://cucumber.io/docs/gherkin/reference/
+
+  Scenario: Monday is best spent in bed.
+    Given today is Monday
+    When I ask whether it's Monday
+    Then I should be told "Stay in bed"
+
   Scenario: Sunday isn't Friday
     Given today is Sunday
     When I ask whether it's Friday yet

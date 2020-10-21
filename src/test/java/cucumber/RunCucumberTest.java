@@ -1,6 +1,7 @@
 package cucumber;
 
 import io.cucumber.junit.platform.engine.Cucumber;
+import org.junit.jupiter.api.Disabled;
 
 @Cucumber
 public class RunCucumberTest {
